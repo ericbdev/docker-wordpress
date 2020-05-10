@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  # https://docs.docker.com/compose/wordpress/
+  wordpress:
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    build:
+      context: ./build
+      dockerfile: Dockerfile
+    # image: wordpress:latest # todo:  use docker file for this
+    ports:
+      - "8000:80"
+    # restart: always
+    # https://docs.docker.com/compose/compose-file/#volumes
+    volumes:
+      # any plugins used to augment wp-rest --- or act in a middleware function
+      - "./plugin:/var/www/html/wp-content/plugins/${BUILD_PLUGIN}"
+      # actual wordpress theme
+      - "./theme:/var/www/html/wp-content/plugins/${BUILD_THEME}"
+
+volumes:
+  db:

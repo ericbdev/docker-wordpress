@@ -1,0 +1,6 @@
+node_modules
+.idea
+
+
+# Anything in src/html is external to actual development
+src/html/**
