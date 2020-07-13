@@ -4,9 +4,10 @@
 
 ## TODO:
 - [x] use dockerfile to build wordpress
-- [ ] specify wp verison
-- [ ] copy in html on build
-- [ ] load in database
+- [ ] bash script
+    - [ ] get script in
+    - [ ] specify wp verison
+    - [ ] load in database
 - [ ] add in webpack automation for FED
 
 ## TLDR
@@ -16,6 +17,7 @@
     - + `docker engine`, do this first https://docs.docker.com/engine/install/
     - and just follow the instructions. 
 - Check docker compose
+- getting `permission denied` errors? do `sudo chmod +x wordpress-entrypoint.sh` 
 
 ## commands
 - `wp:build` - This runs `docker-compose up`
@@ -84,10 +86,21 @@ https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker
 ## additional resosurces
 https://github.com/jaredpalmer/presspack
 https://github.com/kitsunekyo/wordpress-theme-webpack-docker
-https://medium.com/@zhao.li/how-to-understand-building-images-with-docker-compose-24cbdbc0641f
 https://github.com/wagoodman/dive
+
+
+https://vsupalov.com/docker-env-vars/
 https://docs.docker.com/compose/environment-variables/#the-env-file
 
-https://github.com/ericbdev/docker-wordpress
+https://blog.shanelee.name/2017/04/09/how-to-import-and-export-databases-in-mysql-or-mariadb-with-docker/
+https://stackoverflow.com/questions/25920029/setting-up-mysql-and-importing-dump-within-dockerfile#answer-25920875
+
+
+https://medium.com/@zhao.li/how-to-understand-building-images-with-docker-compose-24cbdbc0641f
 https://www.smashingmagazine.com/2019/03/composer-wordpress/
-https://vsupalov.com/docker-env-vars/
+
+
+
+https://kinsta.com/blog/wp-cli/
+https://medium.com/@tatemz/using-wp-cli-with-docker-21b0ab9fab79
+https://stackoverflow.com/questions/50999848/how-to-run-wp-cli-in-docker-compose-yml
