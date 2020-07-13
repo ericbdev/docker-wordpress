@@ -24,7 +24,13 @@
 
 ## Hierarchy
 ## have external files to map in?
-`src/html` -> `var/html/`
+`build/html` -> `var/www/html/`
+
+- add in files in a 1:1 directory map to match production layer, as needed
+- any files in this directory should not be added to the git index
+
+## content / database
+`build/database/database.sql`
 
 ## all plugin related files non theme functionality
 `src/plugin/` -> `build/middleware` -> `var/html/wp-content/plugins/{plugin-name}`
@@ -80,3 +86,8 @@ https://github.com/jaredpalmer/presspack
 https://github.com/kitsunekyo/wordpress-theme-webpack-docker
 https://medium.com/@zhao.li/how-to-understand-building-images-with-docker-compose-24cbdbc0641f
 https://github.com/wagoodman/dive
+https://docs.docker.com/compose/environment-variables/#the-env-file
+
+https://github.com/ericbdev/docker-wordpress
+https://www.smashingmagazine.com/2019/03/composer-wordpress/
+https://vsupalov.com/docker-env-vars/

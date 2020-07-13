@@ -1,10 +1,15 @@
 version: "3.8"
 
 services:
-  db:
-    image: mysql:5.7
+  wordpress_db:
+    # image: mysql:5.7
+    # volumes:
+    #  - db_data:/var/lib/mysql
+    image: mariadb:10.3
+    container_name: wordpress_db
     volumes:
-      - db:/var/lib/mysql
+      - db_data:/var/lib/mysql
+      - "./database/${DATABASE_DUMP}docker-compose down --volumes:/docker-entrypoint-initdb.d/dump.sql"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: somewordpress
@@ -13,27 +18,40 @@ services:
       MYSQL_PASSWORD: wordpress
 
   # https://docs.docker.com/compose/wordpress/
-  wordpress:
-    depends_on:
-      - db
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_NAME: wordpress
+  wordpress_image:
+    container_name: wordpress_image
+    env_file:
+      - .env
     build:
       context: ./build
       dockerfile: Dockerfile
-    # image: wordpress:latest # todo:  use docker file for this
+    depends_on:
+      - wordpress_db
+    environment:
+      WORDPRESS_DB_HOST: wordpress_db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
     ports:
       - "8000:80"
-    # restart: always
+    restart: always
     # https://docs.docker.com/compose/compose-file/#volumes
     volumes:
       # any plugins used to augment wp-rest --- or act in a middleware function
       - "./plugin:/var/www/html/wp-content/plugins/${BUILD_PLUGIN}"
       # actual wordpress theme
-      - "./theme:/var/www/html/wp-content/plugins/${BUILD_THEME}"
+      - "./theme:/var/www/html/wp-content/themes/${BUILD_THEME}"
+
+  phpmyadmin:
+    depends_on:
+      - wordpress_db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 3333:80
+    environment:
+      PMA_HOST: wordpress_db
+      MYSQL_ROOT_PASSWORD: somewordpress
 
 volumes:
-  db:
+  db_data: {}

@@ -1,6 +1,11 @@
 node_modules
 .idea
 
+build/database/**
+build/html/**
+build/plugin/**
+build/theme/**
 
 # Anything in src/html is external to actual development
 src/html/**
+src/*.sql

@@ -4,7 +4,7 @@
   "description": "docker container for wordpress",
   "main": "index.js",
   "scripts": {
-    "wp:up": "docker-compose up",
+    "wp:up": "docker-compose up -d",
     "wp:down": "docker-compose down --volumes",
     "docker:check": "systemctl status docker",
     "test": "echo \"Error: no test specified\" && exit 1"
