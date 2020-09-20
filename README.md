@@ -17,7 +17,9 @@
     - + `docker engine`, do this first https://docs.docker.com/engine/install/
     - and just follow the instructions. 
 - Check docker compose
-- getting `permission denied` errors? do `sudo chmod +x wordpress-entrypoint.sh` 
+- getting `permission denied` errors?
+    - do `sudo chmod +x wp-engine-migrate.sh` 
+    - do `chmod 755 wait-for-it.sh`
 
 ## commands
 - `wp:build` - This runs `docker-compose up`

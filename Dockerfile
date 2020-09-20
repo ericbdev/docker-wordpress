@@ -10,14 +10,23 @@ FROM wordpress:cli-2.4.0-php7.4
 # RUN rm -rf wp-content/plugins/${BUILD_PLUGIN} 
 # RUN rm -rf wp-content/themes/${BUILD_THEME} 
 
-COPY --chown=www-data:www-data ./src/database/${DATABASE_DUMP} /var/www/html/${DATABASE_DUMP}
-COPY --chown=www-data:www-data wordpress-entrypoint.sh /var/www/html/wordpress-entrypoint.sh
+# Add wait-for-it
+# // RUN chmod +x wait-for-it.sh
+
+COPY --chown=www-data:www-data wait-for-it.sh wait-for-it.sh 
+COPY --chown=www-data:www-data wp-engine-migrate.sh wp-engine-migrate.sh
 COPY --chown=www-data:www-data .env /var/www/html/.env
-# RUN chmod +x /var/www/html/wordpress-entrypoint.sh
-# RUN ["chmod", "+x", "/var/www/html/wordpress-entrypoint.sh"]
+COPY --chown=www-data:www-data ./src/database/${DATABASE_DUMP} /var/www/html/${DATABASE_DUMP}
+
+ENTRYPOINT [ "/bin/bash", "-c" ]
+CMD ["./wait-for-it.sh" , "mysql:3306" , "--strict" , "--timeout=300" , "--" , "./wp-engine-migrate.sh"]
+
+
+# RUN chmod +x /var/www/html/wp-engine-migrate.sh
+# RUN ["chmod", "+x", "/var/www/html/wp-engine-migrate.sh"]
 # CMD ["ls", "-A", "/var/www/html/"]
-# RUN /var/www/html/wordpress-entrypoint.sh
-# CMD sudo /var/www/html/wordpress-entrypoint.sh
+# RUN /var/www/html/wp-engine-migrate.sh
+# CMD sudo /var/www/html/wp-engine-migrate.sh
 
 # CMD 
 

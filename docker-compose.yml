@@ -53,10 +53,10 @@ services:
       WORDPRESS_DB_USER: ${WP_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WP_DB_PASS}
       WORDPRESS_DEBUG: 'true'
-    command: 
-      - /bin/sh
-      - -c 
-      - "/var/www/html/wordpress-entrypoint.sh"
+    # command: 
+    #   - /bin/sh
+    #   - -c 
+    #   - "/var/www/html/wp-engine-migrate.sh"
 
     ports:
       - "${WP_PORT}:80"
