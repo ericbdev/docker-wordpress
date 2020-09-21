@@ -20,7 +20,6 @@ else
 fi
 
 wp config create --debug=true --dbhost="wordpress_db:3306" --dbname="$WP_DB_NAME" --dbuser="$WP_DB_USER" --dbpass="$WP_DB_PASS"
-ls
 
 wp db create
 wp core install --url="$WP_URL" --title="$WP_TITLE" --admin_user="$WP_ADMIN_USER" --admin_password="$WP_ADMIN_PASS" --admin_email="$WP_ADMIN_EMAIL"

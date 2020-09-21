@@ -6,6 +6,7 @@
   "scripts": {
     "wp:up": "docker-compose up -d",
     "wp:down": "docker-compose down --volumes",
+    "wp:build:force": "docker-compose up --build --force-recreate",
     "docker:check": "systemctl status docker",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

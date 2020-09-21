@@ -18,7 +18,7 @@
     - and just follow the instructions. 
 - Check docker compose
 - getting `permission denied` errors?
-    - do `sudo chmod +x wp-engine-migrate.sh` 
+    - do `sudo chmod +x wp-migrate.sh` 
     - do `chmod 755 wait-for-it.sh`
 
 ## commands
